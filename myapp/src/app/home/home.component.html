@@ -4,3 +4,10 @@
 <ul>
         {{currentUser.username}}
 </ul>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/education">Education</a>
+        <a class="nav-item nav-link" >Career</a>
+    </div>
+</nav>

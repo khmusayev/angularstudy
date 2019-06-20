@@ -20,11 +20,11 @@ export class AppComponent {
         this.authenticationService.logout().pipe(first())
             .subscribe(
                 data => {
+					this.router.navigate(['/login']);
 					console.log(data);
                 },
                 error => {
 					console.log(error);
                 });;
-        this.router.navigate(['/login']);
     }
 }
