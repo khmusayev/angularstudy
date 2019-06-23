@@ -1,0 +1,8 @@
+  job-list works!
+  <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/jobs/add"><strong>Add Job</strong></a>
+	</div>
+	
+	<tr *ngFor="let j of jobs">
+	  <app-job [job] = j></app-job>
+    </tr>
