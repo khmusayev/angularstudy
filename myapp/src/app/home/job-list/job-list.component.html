@@ -1,8 +1,31 @@
-  job-list works!
-  <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/jobs/add"><strong>Add Job</strong></a>
-	</div>
+
 	
-	<tr *ngFor="let j of jobs">
-	  <app-job [job] = j></app-job>
-    </tr>
+  <div style="margin:50px;">
+  <div class="alert alert-info"><b>Angular 7 HTTP GET Data Using HTTP</b></div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Position</th>
+		  <th>Start date</th>
+		  <th>End date</th>
+		  <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs">
+          <td>{{job.company}}</td>
+          <td>{{job.position}}</td>
+		  <td>{{job.startDate}}</td>
+		  <td>{{job.endDate}}</td>
+		  <td ><u (click)="edit(job)">Edit</u> / <u (click)="delete(job)">Delete</u> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/jobs/add"><strong>Add Job</strong></a>
+</div>

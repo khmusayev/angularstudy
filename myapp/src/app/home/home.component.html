@@ -7,7 +7,9 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
     <div class="navbar-nav">
-        <a class="nav-item nav-link">Education</a>
-        <a class="nav-item nav-link" routerLink="/jobs">Career</a>
+        <a class="nav-item nav-link" (click)="clickOnEdu()" routerLink="/">Education</a>
+        <a class="nav-item nav-link" (click)="clickOnCareer()" routerLink="/">Career</a>
     </div>
 </nav>
+
+<app-job-list *ngIf="clickedOnCareer"></app-job-list>

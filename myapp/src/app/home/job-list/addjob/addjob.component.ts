@@ -31,10 +31,10 @@ export class AddjobComponent implements OnInit {
 			this.router.navigate(['/']);
 		}
 		this.route.queryParams.subscribe(params => {
-			if(params) {
+			if(params["id"] != null) {
 				this.job = new Job(params["id"], params["company"], params["position"], params["startDate"], params["endDate"]);
 			}
-			if (!this.job) {
+			else  {
 				this.job = new Job(-1, '', '', '', '');
 			}
 			console.log(this.job);
@@ -50,7 +50,7 @@ export class AddjobComponent implements OnInit {
 		});
 
 		// get return url from route parameters or default to '/'
-		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/jobs';
+		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 	}
 
 	// convenience getter for easy access to form fields
@@ -71,7 +71,7 @@ export class AddjobComponent implements OnInit {
 		}
 
 		this.loading = true;
-		// let job = new Job(-1, this.f.startDate.value, this.f.endDate.value, this.f.company.value, this.f.position.value);
+		this.job = new Job(this.job.id, this.f.company.value, this.f.position.value, this.f.startDate.value, this.f.endDate.value);
 		this.jobService.addJob(this.job)
 			.pipe(first())
 			.subscribe(

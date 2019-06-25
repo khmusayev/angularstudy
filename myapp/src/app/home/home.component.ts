@@ -9,7 +9,9 @@ import { UserService, AuthenticationService } from '../_services';
 export class HomeComponent implements OnInit, OnDestroy {
     currentUser: User;
     currentUserSubscription: Subscription;
-    users: User[] = [];
+	users: User[] = [];
+	clickedOnEdu: boolean = false;
+	clickedOnCareer: boolean = false;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -39,5 +41,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.userService.getAll().pipe(first()).subscribe(users => {
             this.users = users;
         });
-    }
+	}
+	
+	clickOnEdu() {
+		this.clickedOnEdu = true;
+		this.clickedOnCareer = false;
+	}
+
+	clickOnCareer() {
+		this.clickedOnEdu = false;
+		this.clickedOnCareer = true;
+	}
 }
