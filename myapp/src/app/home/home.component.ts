@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 
 import { User } from '../_models';
 import { UserService, AuthenticationService } from '../_services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit, OnDestroy {
@@ -15,11 +16,18 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     constructor(
         private authenticationService: AuthenticationService,
-        private userService: UserService
+		private userService: UserService,
+		private route: ActivatedRoute
     ) {
         this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
             this.currentUser = user;
-        });
+		});
+		this.route.queryParams.subscribe(params => {
+			if(params["clickedOnCareer"] != null) {
+				this.clickedOnEdu = params["clickedOnEdu"];
+				this.clickedOnCareer = params["clickedOnCareer"];
+			}
+		});
     }
 
     ngOnInit() {

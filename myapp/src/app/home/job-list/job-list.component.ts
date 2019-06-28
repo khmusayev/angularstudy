@@ -5,6 +5,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/_services';
 import { MatTableModule } from '@angular/material';
+import { ComponentFactoryResolver } from '@angular/core/src/render3';
 
 @Component({
 	selector: 'app-job-list',
@@ -44,7 +45,7 @@ export class JobListComponent implements OnInit {
 				"company": job.company,
 				"position": job.position,
 				"endDate": job.endDate,
-				"startDate": job.startDate
+				"startDate": job.startDate,
 			}
 		};
 		this.router.navigate(['/jobs/add'], navigationExtras);
@@ -56,13 +57,24 @@ export class JobListComponent implements OnInit {
 			.subscribe(
 				data => {
 					console.log(data);
+					let navigationExtras: NavigationExtras = {
+						queryParams: {
+							"clickedOnEdu": false,
+							"clickedOnCareer": true,
+						}
+					};
+					this.redirectTo('/', navigationExtras);
 				},
 				error => {
 					this.alertService.error(error);
 					console.log(error);
-					this.router.navigate(['/']);
 				});
-		this.router.navigate(['/']);
+	}
+
+	redirectTo(uri: string, navigationExtras: NavigationExtras) {
+		console.log("REDIRECTING TO HOME!!!!!");
+		this.router.navigateByUrl('/DummyComponent', { skipLocationChange: true }).then(() =>
+			this.router.navigate([uri], navigationExtras));
 	}
 
 }

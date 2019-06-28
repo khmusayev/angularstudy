@@ -1,35 +1,50 @@
-<h2>Login</h2>
+<h4>Add/Edit Job</h4>
+<br><br>
 <form [formGroup]="addjobform" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="company">Company</label>
-        <input type="text" formControlName="company" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.company.errors }" />
-        <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
-            <div *ngIf="f.company.errors.required">Company is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="position">Position</label>
-        <input type="position" formControlName="position" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.position.errors }" />
-        <div *ngIf="submitted && f.position.errors" class="invalid-feedback">
-            <div *ngIf="f.position.errors.required">Password is required</div>
-        </div>
+	<div class="form-group">
+		<label for="company">Company</label>
+		<input type="text" formControlName="company" class="form-control"
+			[ngClass]="{ 'is-invalid': submitted && f.company.errors }" />
+		<div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+			<div *ngIf="f.company.errors.required">Company is required</div>
+		</div>
 	</div>
 	<div class="form-group">
-        <label for="startDate">Start Date</label>
-        <input type="text" formControlName="startDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
-        <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
-            <div *ngIf="f.startDate.errors.required">Start date is required</div>
-        </div>
+		<label for="position">Position</label>
+		<input type="position" formControlName="position" class="form-control"
+			[ngClass]="{ 'is-invalid': submitted && f.position.errors }" />
+		<div *ngIf="submitted && f.position.errors" class="invalid-feedback">
+			<div *ngIf="f.position.errors.required">Position is required</div>
+		</div>
 	</div>
 	<div class="form-group">
-        <label for="endDate">End Date</label>
-        <input type="text" formControlName="endDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
-        <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
-            <div *ngIf="f.endDate.errors.required">End date is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">Save</button>
-        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-    </div>
+		<label for="startDate">Start Date</label>
+		<input type="text" formControlName="startDate" class="form-control"
+			[ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
+		<div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
+			<div *ngIf="f.startDate.errors.required">Start date is required</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="endDate">End Date</label>
+		<input type="text" formControlName="endDate" class="form-control"
+			[ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
+		<div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
+			<div *ngIf="f.endDate.errors.required">End date is required</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="description">Description of the position</label>
+		<div>
+			<textarea formControlName="description" name="description" rows="5" class="form-control" id="description"
+				placeholder="Description">Description</textarea>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<button [disabled]="loading" class="btn btn-primary">Save</button>
+		<img *ngIf="loading"
+			src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	</div>
 </form>

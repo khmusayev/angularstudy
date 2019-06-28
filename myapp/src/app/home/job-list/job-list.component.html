@@ -1,31 +1,30 @@
+<div class="alert alert-info"><b>WORK EXPERIENCE</b></div>
 
-	
-  <div style="margin:50px;">
-  <div class="alert alert-info"><b>Angular 7 HTTP GET Data Using HTTP</b></div>
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>Position</th>
-		  <th>Start date</th>
-		  <th>End date</th>
-		  <th>Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let job of jobs">
-          <td>{{job.company}}</td>
-          <td>{{job.position}}</td>
-		  <td>{{job.startDate}}</td>
-		  <td>{{job.endDate}}</td>
-		  <td ><u (click)="edit(job)">Edit</u> / <u (click)="delete(job)">Delete</u> </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+
+<!-- publisher -->
+
+<div class="col-md-12" *ngFor="let job of jobs">
+
+		<label class="col-md-8 control-label" for="company" style="font-size:20px;"><Strong>{{job.company}}</Strong>  </label>
+		<span class="col-md-4 control-label"><u (click)="edit(job)">Edit</u> / <u (click)="delete(job)">Delete</u></span>
+		
+	<!-- publication date -->
+		<label class="col-md-12 control-label" for="position"><Strong>{{job.position}}</Strong></label>
+
+	<!-- language -->
+		<label class="col-md-12 control-label" for="dates">{{job.startDate}}-{{job.endDate}}</label>
+
+	<!-- description -->
+		<label class="col-md-12 control-label" for="description">Description:</label>
+		<div class="col-md-8">
+			<textarea readonly name="description" rows="6" class="form-control" id="description" placeholder="Description">{{job.description}}</textarea>
+			<!-- <span class="help-block">Description of the book</span> -->
+		</div>
+		
+		<br><br><br>
 </div>
 
 <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/jobs/add"><strong>Add Job</strong></a>
+	<a class="nav-item nav-link" routerLink="/jobs/add"><strong>Add Job</strong></a>
 </div>

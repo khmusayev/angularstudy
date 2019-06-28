@@ -67,9 +67,12 @@ export class JobService {
 
 		return this.http.delete<any>(this.ROOT_URL_PRIV + '?jobid=' + job.id, { headers: headers })
 			.pipe(map(data => {
+				console.log("We are at NOWHERE!!!");
 				if (data) {
+					console.log("We are at the RIGHT spot!!!");
 					return true;
 				}
+				console.log("We are at the WRONG spot!!!");
 				return false;
 			}));
 	}

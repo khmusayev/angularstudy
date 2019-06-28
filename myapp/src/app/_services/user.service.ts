@@ -18,7 +18,7 @@ export class UserService {
     }
 
     register(user: User) {
-		return this.http.post<any>(this.ROOT_URL + '/register?username=' + user.username + '&password=' + user.password, {})
+		return this.http.post<any>(this.ROOT_URL + '/register?username=' + user.username + '&password=' + user.password + '&firstName=' + user.firstName+ '&lastName=' + user.lastName, {})
     }
 
     update(user: User) {
