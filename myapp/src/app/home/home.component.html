@@ -7,4 +7,5 @@
     </div>
 </nav>
 
-<app-job-list *ngIf="clickedOnCareer"></app-job-list>
+<app-job-list *ngIf="!clickedOnEdu"></app-job-list>
+<app-edu-list *ngIf="clickedOnEdu"></app-edu-list>

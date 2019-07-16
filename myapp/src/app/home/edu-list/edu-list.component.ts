@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Job } from 'src/app/_models/job';
-import { JobService } from 'src/app/_services/job.service';
+import { Education } from 'src/app/_models/edu';
+import { EduService } from 'src/app/_services/edu.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/_services';
@@ -8,28 +8,28 @@ import { MatTableModule } from '@angular/material';
 import { ComponentFactoryResolver } from '@angular/core/src/render3';
 
 @Component({
-	selector: 'app-job-list',
-	templateUrl: './job-list.component.html',
-	styleUrls: ['./job-list.component.css']
+  selector: 'app-edu-list',
+  templateUrl: './edu-list.component.html',
+  styleUrls: ['./edu-list.component.css']
 })
-export class JobListComponent implements OnInit {
-	jobs: Job[];
+export class EduListComponent implements OnInit {
+	edus: Education[]
 
-	constructor(private router: Router, private jobService: JobService,
+  constructor(private router: Router, private eduService: EduService,
 		private alertService: AlertService) {
-		if (!this.jobService.currentUserValue) {
+		if (!this.eduService.currentUserValue) {
 			this.router.navigate(['/']);
 		}
 	}
 
-	ngOnInit() {
-		this.jobService.getJobs()
+  ngOnInit() {
+		this.eduService.getEdus()
 			.pipe(first())
 			.subscribe(
 				data => {
 					console.log(data);
-					this.jobs = data;
-					console.log(this.jobs);
+					this.edus = data;
+					console.log(this.edus);
 					console.log(data);
 				},
 				error => {
@@ -37,31 +37,31 @@ export class JobListComponent implements OnInit {
 					console.log(error);
 				});
 	}
-
-	edit(job: Job) {
+	
+	edit(edu: Education) {
 		let navigationExtras: NavigationExtras = {
 			queryParams: {
-				"id": job.id,
-				"company": job.company,
-				"position": job.position,
-				"endDate": job.endDate,
-				"startDate": job.startDate,
-				"description": job.description,
+				"id": edu.id,
+				"university": edu.university,
+				"faculty": edu.faculty,
+				"endDate": edu.endDate,
+				"startDate": edu.startDate,
+				"description": edu.description,
 			}
 		};
-		this.router.navigate(['/jobs/add'], navigationExtras);
+		this.router.navigate(['/edus/add'], navigationExtras);
 	}
-
-	delete(job: Job) {
-		this.jobService.deleteJob(job)
+	
+		delete(edu: Education) {
+		this.eduService.deleteEdu(edu)
 			.pipe(first())
 			.subscribe(
 				data => {
 					console.log(data);
 					let navigationExtras: NavigationExtras = {
 						queryParams: {
-							"clickedOnEdu": false,
-							"clickedOnCareer": true,
+							"clickedOnEdu": true,
+							"clickedOnCareer": false,
 						}
 					};
 					this.redirectTo('/', navigationExtras);
@@ -71,7 +71,7 @@ export class JobListComponent implements OnInit {
 					console.log(error);
 				});
 	}
-
+	
 	redirectTo(uri: string, navigationExtras: NavigationExtras) {
 		console.log("REDIRECTING TO HOME!!!!!");
 		this.router.navigateByUrl('/DummyComponent', { skipLocationChange: true }).then(() =>

@@ -17,6 +17,8 @@ import { RegisterComponent } from './register';
 import { JobListComponent } from './home/job-list/job-list.component';
 import { JobComponent } from './home/job-list/job/job.component';
 import { AddjobComponent } from './home/job-list/addjob/addjob.component';
+import { EduListComponent } from './home/edu-list/edu-list.component';
+import { AddeduComponent } from './home/edu-list/addedu/addedu.component';
 
 @NgModule({
     imports: [
@@ -34,6 +36,8 @@ import { AddjobComponent } from './home/job-list/addjob/addjob.component';
         JobListComponent,
         JobComponent,
         AddjobComponent,
+        EduListComponent,
+        AddeduComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
