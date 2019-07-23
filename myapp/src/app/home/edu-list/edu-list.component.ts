@@ -4,8 +4,6 @@ import { EduService } from 'src/app/_services/edu.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/_services';
-import { MatTableModule } from '@angular/material';
-import { ComponentFactoryResolver } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-edu-list',

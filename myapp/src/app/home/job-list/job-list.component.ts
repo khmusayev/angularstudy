@@ -4,8 +4,6 @@ import { JobService } from 'src/app/_services/job.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/_services';
-import { MatTableModule } from '@angular/material';
-import { ComponentFactoryResolver } from '@angular/core/src/render3';
 
 @Component({
 	selector: 'app-job-list',
