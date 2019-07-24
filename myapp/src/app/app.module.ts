@@ -19,6 +19,9 @@ import { JobComponent } from './home/job-list/job/job.component';
 import { AddjobComponent } from './home/job-list/addjob/addjob.component';
 import { EduListComponent } from './home/edu-list/edu-list.component';
 import { AddeduComponent } from './home/edu-list/addedu/addedu.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from 'src/app/_services/confirmDialog.service';  
+
 
 @NgModule({
     imports: [
@@ -38,13 +41,18 @@ import { AddeduComponent } from './home/edu-list/addedu/addedu.component';
         AddjobComponent,
         EduListComponent,
         AddeduComponent,
+        ConfirmDialogComponent,
+    ],
+    exports: [  
+        ConfirmDialogComponent  
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend
-        fakeBackendProvider
+        fakeBackendProvider,
+        ConfirmDialogService  
     ],
     bootstrap: [AppComponent]
 })

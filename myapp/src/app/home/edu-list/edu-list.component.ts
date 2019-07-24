@@ -4,6 +4,7 @@ import { EduService } from 'src/app/_services/edu.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/_services';
+import { ConfirmDialogService } from 'src/app/_services/confirmDialog.service';  
 
 @Component({
   selector: 'app-edu-list',
@@ -14,7 +15,7 @@ export class EduListComponent implements OnInit {
 	edus: Education[]
 
   constructor(private router: Router, private eduService: EduService,
-		private alertService: AlertService) {
+		private alertService: AlertService, private confirmDialogService: ConfirmDialogService) {
 		if (!this.eduService.currentUserValue) {
 			this.router.navigate(['/']);
 		}
@@ -75,5 +76,15 @@ export class EduListComponent implements OnInit {
 		this.router.navigateByUrl('/DummyComponent', { skipLocationChange: true }).then(() =>
 			this.router.navigate([uri], navigationExtras));
 	}
+	
+	showDialog(edu: Education) {  
+	var ms = this;
+    this.confirmDialogService.confirmThis("Do you really want to delete this education entry?", function () {  
+      ms.delete(edu);
+      alert("Yes clicked");  
+    }, function () {  
+      alert("No clicked");  
+    })  
+  }
 
 }

@@ -7,7 +7,7 @@
 <div class="col-md-12" *ngFor="let job of jobs">
 
 		<label class="col-md-8 control-label" for="company" style="font-size:20px;"><Strong>{{job.company}}</Strong>  </label>
-		<span class="col-md-4 control-label"><u (click)="edit(job)">Edit</u> / <u (click)="delete(job)">Delete</u></span>
+		<span class="col-md-4 control-label"><u (click)="edit(job)">Edit</u> / <u (click)="showDialog(job)">Delete</u></span>
 		
 	<!-- publication date -->
 		<label class="col-md-12 control-label" for="position"><Strong>{{job.position}}</Strong></label>
@@ -28,3 +28,5 @@
 <div class="navbar-nav">
 	<a class="nav-item nav-link" routerLink="/jobs/add"><strong>Add Job</strong></a>
 </div>
+
+<app-confirm-dialog></app-confirm-dialog> 

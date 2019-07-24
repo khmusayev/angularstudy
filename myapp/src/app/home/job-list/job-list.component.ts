@@ -4,6 +4,7 @@ import { JobService } from 'src/app/_services/job.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/_services';
+import { ConfirmDialogService } from 'src/app/_services/confirmDialog.service';  
 
 @Component({
 	selector: 'app-job-list',
@@ -14,7 +15,7 @@ export class JobListComponent implements OnInit {
 	jobs: Job[];
 
 	constructor(private router: Router, private jobService: JobService,
-		private alertService: AlertService) {
+		private alertService: AlertService,  private confirmDialogService: ConfirmDialogService) {
 		if (!this.jobService.currentUserValue) {
 			this.router.navigate(['/']);
 		}
@@ -75,5 +76,15 @@ export class JobListComponent implements OnInit {
 		this.router.navigateByUrl('/DummyComponent', { skipLocationChange: true }).then(() =>
 			this.router.navigate([uri], navigationExtras));
 	}
+	
+	showDialog(job: Job) {  
+	var ms = this;
+    this.confirmDialogService.confirmThis("Do you really want to delete this job entry?", function () {  
+      ms.delete(job);
+      alert("Yes clicked");  
+    }, function () {  
+      alert("No clicked");  
+    })  
+  }  
 
 }

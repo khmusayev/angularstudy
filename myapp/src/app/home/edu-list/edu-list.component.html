@@ -7,7 +7,7 @@
 <div class="col-md-12" *ngFor="let edu of edus">
 
 		<label class="col-md-8 control-label" for="university" style="font-size:20px;"><Strong>{{edu.university}}</Strong>  </label>
-		<span class="col-md-4 control-label"><u (click)="edit(edu)">Edit</u> / <u (click)="delete(edu)">Delete</u></span>
+		<span class="col-md-4 control-label"><u (click)="edit(edu)">Edit</u> / <u (click)="showDialog(edu)">Delete</u></span>
 		
 	<!-- publication date -->
 		<label class="col-md-12 control-label" for="faculty"><Strong>{{edu.faculty}}</Strong></label>
@@ -28,3 +28,5 @@
 <div class="navbar-nav">
 	<a class="nav-item nav-link" routerLink="/edus/add"><strong>Add Edu</strong></a>
 </div>
+
+<app-confirm-dialog></app-confirm-dialog> 
