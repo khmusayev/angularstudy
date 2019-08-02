@@ -1,0 +1,25 @@
+<div class="alert alert-info"><b>Contact</b></div>
+
+
+
+<!-- publisher -->
+
+<div class="col-md-12" *ngIf="contactExists()">
+
+	<!-- publication date -->
+		<label class="col-md-12 control-label" for="address">{{contact.address}}</label>
+
+	<!-- language -->
+		<label class="col-md-12 control-label" for="email">{{contact.email}}</label>
+
+	<!-- language -->
+		<label class="col-md-12 control-label" for="phone">{{contact.phone}}</label>
+		
+		<br><br><br>
+</div>
+
+<div class="navbar-nav">
+	<span class="col-md-4 control-label"><u (click)="edit()">Edit</u> / <u (click)="showDialog()">Delete</u></span>
+</div>
+
+<app-confirm-dialog></app-confirm-dialog> 

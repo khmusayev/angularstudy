@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     currentUser: User;
     currentUserSubscription: Subscription;
 	users: User[] = [];
+	clickedOnAboutMe: boolean = false;
 	clickedOnEdu: boolean = false;
 	clickedOnCareer: boolean = false;
 
@@ -51,12 +52,20 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
 	}
 	
+	clickOnAboutMe() {
+		this.clickedOnAboutMe = true;
+		this.clickedOnEdu = false;
+		this.clickedOnCareer = false;
+	}
+	
 	clickOnEdu() {
+	    this.clickedOnAboutMe = false;
 		this.clickedOnEdu = true;
 		this.clickedOnCareer = false;
 	}
 
 	clickOnCareer() {
+	    this.clickedOnAboutMe = false;
 		this.clickedOnEdu = false;
 		this.clickedOnCareer = true;
 	}

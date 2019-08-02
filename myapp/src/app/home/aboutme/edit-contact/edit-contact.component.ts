@@ -1,52 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { Education } from 'src/app/_models/edu';
+import { Contact } from 'src/app/_models/contact';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AlertService } from 'src/app/_services';
 import { first } from 'rxjs/operators';
-import { EduService } from 'src/app/_services/edu.service';
+import { ContactService } from 'src/app/_services/contact.service';
 
 @Component({
-  selector: 'app-addedu',
-  templateUrl: './addedu.component.html',
-  styleUrls: ['./addedu.component.css']
+  selector: 'app-edit-contact',
+  templateUrl: './edit-contact.component.html',
+  styleUrls: ['./edit-contact.component.css']
 })
-export class AddeduComponent implements OnInit {
-    addeduform: FormGroup;
+export class EditContactComponent implements OnInit {
+
+    editcontactform: FormGroup;
 	loading = false;
 	submitted = false;
 	returnUrl: string;
-	public edu: Education;
+	public contact: Contact;
 	
   constructor(
         private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
 		private router: Router,
-		private eduService: EduService,
+		private contactService: ContactService,
 		private alertService: AlertService
   ) { 
   // redirect to home if already logged in
-		if (!this.eduService.currentUserValue) {
+		if (!this.contactService.currentUserValue) {
 			this.router.navigate(['/']);
 		}
 		this.route.queryParams.subscribe(params => {
 			if (params["id"] != null) {
-				this.edu = new Education(params["id"], params["university"], params["faculty"], params["startDate"], params["endDate"], params["description"]);
+				this.contact = new Contact(params["id"], params["address"], params["email"], params["phone"]);
 			}
 			else {
-				this.edu = new Education(-1, '', '', '', '', '');
+				this.contact = new Contact(-1, '', '', '');
 			}
-			console.log(this.edu);
 		});
   }
 
   	ngOnInit() {
-		this.addeduform = this.formBuilder.group({
-			university: [this.edu.university, Validators.required],
-			faculty: [this.edu.faculty, Validators.required],
-			startDate: [this.edu.startDate, Validators.required],
-			endDate: [this.edu.endDate, Validators.required],
-			description: [this.edu.description]
+		this.editcontactform = this.formBuilder.group({
+			address: [this.contact.address, Validators.required],
+			email: [this.contact.email, Validators.required],
+			phone: [this.contact.phone, Validators.required]
 		});
 
 		// get return url from route parameters or default to '/'
@@ -54,34 +52,32 @@ export class AddeduComponent implements OnInit {
 	}
 	
 	// convenience getter for easy access to form fields
-	get f() { return this.addeduform.controls; }
+	get f() { return this.editcontactform.controls; }
 
 
 	onSubmit() {
-		console.log(this.edu);
 		this.submitted = true;
 
 		// stop here if form is invalid
-		if (this.addeduform.invalid) {
+		if (this.editcontactform.invalid) {
 			return;
 		}
 
 		this.loading = true;
-		this.edu = new Education(this.edu.id, this.f.university.value, this.f.faculty.value, this.f.startDate.value, this.f.endDate.value, this.f.description.value);
-		this.eduService.addEducation(this.edu)
+		this.contact = new Contact(this.contact.id, this.f.address.value, this.f.email.value, this.f.phone.value);
+		this.contactService.editContact(this.contact)
 			.pipe(first())
 			.subscribe(
 				data => {
 					this.router.navigate([this.returnUrl]);
 					let navigationExtras: NavigationExtras = {
 						queryParams: {
-						    "clickedOnAboutMe": false,
-							"clickedOnEdu": true,
+						    "clickedOnAboutMe": true,
+							"clickedOnEdu": false,
 							"clickedOnCareer": false,
 						}
 					};
 					this.router.navigate([this.returnUrl], navigationExtras);
-					console.log(data);
 				},
 				error => {
 					this.alertService.error(error);
@@ -93,4 +89,5 @@ export class AddeduComponent implements OnInit {
 	backToHomePage() {
 		this.router.navigate(['/']);
 	}
+
 }

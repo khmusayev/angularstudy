@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers';
 
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
@@ -20,7 +18,9 @@ import { AddjobComponent } from './home/job-list/addjob/addjob.component';
 import { EduListComponent } from './home/edu-list/edu-list.component';
 import { AddeduComponent } from './home/edu-list/addedu/addedu.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { ConfirmDialogService } from 'src/app/_services/confirmDialog.service';  
+import { ConfirmDialogService } from 'src/app/_services/confirmDialog.service';
+import { AboutmeComponent } from './home/aboutme/aboutme.component';
+import { EditContactComponent } from './home/aboutme/edit-contact/edit-contact.component';  
 
 
 @NgModule({
@@ -42,6 +42,8 @@ import { ConfirmDialogService } from 'src/app/_services/confirmDialog.service';
         EduListComponent,
         AddeduComponent,
         ConfirmDialogComponent,
+        AboutmeComponent,
+        EditContactComponent,
     ],
     exports: [  
         ConfirmDialogComponent  
@@ -49,9 +51,6 @@ import { ConfirmDialogService } from 'src/app/_services/confirmDialog.service';
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
-        // provider used to create fake backend
-        fakeBackendProvider,
         ConfirmDialogService  
     ],
     bootstrap: [AppComponent]

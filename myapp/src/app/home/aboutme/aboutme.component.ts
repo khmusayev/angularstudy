@@ -1,34 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { Education } from 'src/app/_models/edu';
-import { EduService } from 'src/app/_services/edu.service';
+import { Contact } from 'src/app/_models/contact';
+import { ContactService } from 'src/app/_services/contact.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/_services';
 import { ConfirmDialogService } from 'src/app/_services/confirmDialog.service';  
 
 @Component({
-  selector: 'app-edu-list',
-  templateUrl: './edu-list.component.html',
-  styleUrls: ['./edu-list.component.css']
+  selector: 'app-aboutme',
+  templateUrl: './aboutme.component.html',
+  styleUrls: ['./aboutme.component.css']
 })
-export class EduListComponent implements OnInit {
-	edus: Education[]
+export class AboutmeComponent implements OnInit {
 
-  constructor(private router: Router, private eduService: EduService,
+  contact: Contact
+
+  constructor(private router: Router, private contactService: ContactService,
 		private alertService: AlertService, private confirmDialogService: ConfirmDialogService) {
-		if (!this.eduService.currentUserValue) {
+		if (!this.contactService.currentUserValue) {
 			this.router.navigate(['/']);
 		}
 	}
 
-  ngOnInit() {
-		this.eduService.getEdus()
+   ngOnInit() {
+		this.contactService.getContact()
 			.pipe(first())
 			.subscribe(
 				data => {
 					console.log(data);
-					this.edus = data;
-					console.log(this.edus);
+					this.contact = data;
+					console.log(this.contact);
 					console.log(data);
 				},
 				error => {
@@ -37,29 +38,32 @@ export class EduListComponent implements OnInit {
 				});
 	}
 	
-	edit(edu: Education) {
+	edit() {
+		if(this.contact == null) {
+		    this.router.navigate(['/contact/edit']);
+		} else {
 		let navigationExtras: NavigationExtras = {
 			queryParams: {
-				"id": edu.id,
-				"university": edu.university,
-				"faculty": edu.faculty,
-				"endDate": edu.endDate,
-				"startDate": edu.startDate,
-				"description": edu.description,
+				"id": this.contact.id,
+				"address": this.contact.address,
+				"email": this.contact.email,
+				"phone": this.contact.phone,
 			}
 		};
-		this.router.navigate(['/edus/edit'], navigationExtras);
+		this.router.navigate(['/contact/edit'], navigationExtras);
+		}
 	}
 	
-		delete(edu: Education) {
-		this.eduService.deleteEdu(edu)
+		delete() {
+		this.contactService.deleteContact()
 			.pipe(first())
 			.subscribe(
 				data => {
 					console.log(data);
 					let navigationExtras: NavigationExtras = {
 						queryParams: {
-							"clickedOnEdu": true,
+						    "clickedOnAboutMe":true,
+							"clickedOnEdu": false,
 							"clickedOnCareer": false,
 						}
 					};
@@ -77,10 +81,14 @@ export class EduListComponent implements OnInit {
 			this.router.navigate([uri], navigationExtras));
 	}
 	
-	showDialog(edu: Education) {  
+	contactExists() {
+	return this.contact != null;
+	}
+	
+	showDialog() {  
 	var ms = this;
-    this.confirmDialogService.confirmThis("Do you really want to delete this education entry?", function () {  
-      ms.delete(edu);
+    this.confirmDialogService.confirmThis("Do you really want to delete the contact?", function () {  
+      ms.delete();
       alert("Yes clicked");  
     }, function () {  
       alert("No clicked");  

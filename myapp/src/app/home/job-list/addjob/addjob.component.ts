@@ -80,6 +80,7 @@ export class AddjobComponent implements OnInit {
 					this.router.navigate([this.returnUrl]);
 					let navigationExtras: NavigationExtras = {
 						queryParams: {
+						    "clickedOnAboutMe": false,
 							"clickedOnEdu": false,
 							"clickedOnCareer": true,
 						}
@@ -92,6 +93,10 @@ export class AddjobComponent implements OnInit {
 					this.loading = false;
 					console.log(error);
 				});
+	}
+	
+	backToHomePage() {
+		this.router.navigate(['/']);
 	}
 
 }

@@ -6,6 +6,7 @@ import { RegisterComponent } from './register';
 import { JobListComponent } from './home/job-list/job-list.component';
 import { AddjobComponent } from './home/job-list/addjob/addjob.component';
 import { AddeduComponent } from './home/edu-list/addedu/addedu.component';
+import { EditContactComponent } from './home/aboutme/edit-contact/edit-contact.component';
 import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
 	{ path: 'jobs', component: JobListComponent },
 	{ path: 'jobs/add', component: AddjobComponent },
 	{ path: 'edus/add', component: AddeduComponent },
+	{ path: 'contact/edit', component: EditContactComponent },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
